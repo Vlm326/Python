@@ -20,6 +20,7 @@ with open(fr"C:\Users\vladm\Downloads\27_A_17882.txt") as file:
 first_cluster = []
 second_cluster = []
 
+
 for i in lst:
     if i[0] < 1:
         first_cluster.append(i)

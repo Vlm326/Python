@@ -313,3 +313,40 @@ print(mx)
 
 
 
+with open(fr"C:\Users\vladm\Downloads\24_7600.txt", "r") as f:
+    string = f.readline()
+
+for i in 'QRS':
+    string = string.replace(i, '*')
+
+max_len = float('-inf')
+count = 1
+for i in range(len(string) - 1):
+    if string[i] == '*' and string[i + 1] == '*':
+        count = 1
+        
+    else:
+        count += 1
+        max_len = max(max_len, count)
+
+print(max_len)
+
+
+
+with open(fr"C:\Users\vladm\Downloads\24_7272.txt", 'r') as f:
+    string = f.readline()
+
+for i in ('AB', 'CB'):
+    string = string.replace(i, '*')
+
+count = 0
+max_len = float('-inf')
+for i in string:
+    if i == '*':
+        count += 1
+        max_len = max(max_len, count)
+    else:
+        count = 0
+
+
+print(max_len)

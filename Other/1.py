@@ -1,15 +1,37 @@
-from tqdm import *
-from time import *
+import pyttsx3
+import time
 
+path = str(input('Input path to your file: ').strip())
+type_of_spliter = str(input('Type of spliter: ').strip())
 
-s = "Hello, World!" * 1000000  # Example large string
-def f(s):
-    counter = {}
-    for i in tqdm(range(len(s)), desc = 'Counting', ncols = 100, colour = 'green'):
-        if i in counter.keys():
-            counter[i] += 1
-        else:
-            counter[i] = 1
-
-f(s)
-    
+try:
+    with open(fr'path', encoding='utf-8') as file:
+        words = []
+        lst = [line.strip() for line in file if line != ' ']
+        for i in range(len(lst)):
+            if len(lst[i]) > 1:
+                for i in lst[i].replace("'", '').strip().split(type_of_spliter):
+                    words.append(i)
+except:
+    print('file not found, try again')
+    exit()
+errors = []
+engine = pyttsx3.init()
+for i in range(len(words)):
+    engine.say(words[i])
+    engine.runAndWait()
+    time.sleep(2)
+    inp = str(input()).strip()
+    if inp == words[i]:
+        print('Correct!')
+    elif inp == 'след':
+        continue
+    else:
+        engine.say('Неправильно!')
+        time.sleep(1)
+        engine.runAndWait()
+        print('Incorrect!')
+        print(f'The correct word is: {words[i].strip()}')
+        errors.append(words[i])
+for i in errors:
+    print(i)
