@@ -266,6 +266,28 @@ for x in s.split('W'):
 
 
 print(max_len)
+
+
+
+with open(fr"C:\Users\vladm\Downloads\24.txt", 'r') as file:
+    string = file.readline()
+
+for i in ('**', '++', '+*', '*+'):
+    string = string.replace(i, 'X')
+for i in '123456789':
+    string = string.replace(i, '1')
+max_len = 0
+for i in string.split('X'):
+    if len(i) > max_len:
+        for j in range(len(i) - 1):
+            if i[j] not in '+*' and i[j] + i[j + 1] not in ('00', '01'):
+                substring = i[j]
+                for k in range(j + 1, len(i)):
+                    substring += i[k] 
+                    if substring[-1] not in '+*':
+                        if eval(substring) == 0:
+                            max_len = max(max_len, len(substring))
+print(max_len)
 '''################################################################################################################'''
 
 '''
