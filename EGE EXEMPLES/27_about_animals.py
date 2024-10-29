@@ -1,3 +1,4 @@
+'''
 def count_social_animals(cluster):
     social_count = 0
     non_social_count = 0
@@ -34,10 +35,7 @@ for i in lst:
 K, S = count_social_animals(first_group)
 print(K, S)
 
-
-
-
-
+'''
 
 
 
@@ -53,16 +51,13 @@ def count_social_animals(cluster):
                             (animal[1] - other_animal[1])**2)**0.5
                 if distance <= 0.1:
                     neighbors += 1
-        if neighbors >= 14 and 2 <= animal[0] <= 4 and 3 <= animal[1] <= 4:
+        if (neighbors > 14 and 2 <= animal[0] <= 4 and 3 <= animal[1] <= 4)\
+            or (neighbors > 14 and 3 < animal[0] <= 4 and 2 <= animal[1] <= 3):
             social_count += 1
-        elif neighbors >= 14 and 3 <= animal[0] <= 4 and 2 <= animal[1] <= 3:
-            social_count += 1
-        elif neighbors < 14 and 2 <= animal[0] <= 4 and 3 <= animal[1] <= 4:
+        elif (neighbors < 14 and 2 <= animal[0] <= 4 and 3 <= animal[1] <= 4)\
+            or (neighbors < 14 and 3 < animal[0] <= 4 and 2 <= animal[1] <= 3):
             non_social_count += 1
-        elif neighbors < 14 and 3 <= animal[0] <= 4 and 2 <= animal[1] <= 3:
-            non_social_count += 1    
-        else:
-            pass
+        
     return social_count, non_social_count
 
 
@@ -75,10 +70,10 @@ group = []
 
 
 for i in lst:
-    if 1.9 <= i[0] <= 4.1 and 2.9 <= i[1] <= 4.1:
+    if 1.9 <= i[0] <= 3 and 2.9 <= i[1] <= 4.1:
         group.append(i)
-    if 2.95 <= i[0] <= 4.1 and 1.9 <= i[1] <= 3:
+    if 2.9 <= i[0] <= 4.1 and 1.9 <= i[1] <= 4.1:
         group.append(i)
-
+print(len(group))
 K, S = count_social_animals(group)
 print(K, S)

@@ -372,3 +372,28 @@ for i in string:
 
 
 print(max_len)
+
+
+
+
+########################################################
+with open(fr"C:\Users\vladm\Downloads\24_5381.txt") as file:
+    string = file.readline()
+
+max_len = 0
+vovel = 'AEU'
+non_vovel = 'BCDF'
+last = 0
+lst = []
+
+for i in range(len(string) - 2):
+    if string[i] in non_vovel and string[i + 1] in vovel and string[i + 2] in non_vovel:
+        if i - last + 2 > max_len:
+            max_len = i - last + 2
+        if len(lst) > 1:
+            last = lst.pop(0)
+        lst.append(i + 1)
+                
+print(max_len)
+                
+            
