@@ -139,3 +139,119 @@ def f4205(self) -> None:
 
 
 
+with open(fr"C:\Users\vladm\Downloads\26_18228.txt") as file:
+    N, R = map(int,file.readline().split())
+    lst = [x for x in file]
+    types_of_stickes = {}
+    for i in range(len(lst)):
+        types_of_stickes[i + 1] = max(tuple(map(int,lst[i].split()))) 
+    amount = R * 2
+    count = 0
+    while amount > 0:
+        for i in sorted(types_of_stickes.values(), reverse=True):
+            print(count, amount, i)
+            if amount - i < 0:
+                print('Lower')
+                print(count, amount)
+                break
+            amount -= i
+            count += 1  
+        break
+    for i in sorted(types_of_stickes.items(), key=lambda x: x[1]):
+        if i[1] >= amount:
+            count += 1
+            print(count, i[0])
+            break
+    
+
+with open(fr'C:\Users\vladm\Documents\MyProjects\A lot of files\Other\26_18621.txt') as file:
+    amount_of_students = int(file.readline())
+    dict_of_students = {}
+    for line in file:
+        lst = line.split()
+        dict_of_students[lst[0]] = (sum(int(x) for x in lst[1:]), sum(int(x) for x in lst[1:] if int(x) > 0), len([x for x in lst[1:] if int(x) != 0]))
+
+sorted_students = sorted(dict_of_students.items(), key=lambda x: (-x[1][0], -x[1][1], -x[1][2], int(x[0])))
+
+
+cutoff_index = amount_of_students // 4
+cutoff_score = sorted_students[cutoff_index - 1]
+
+passed_students = set()
+if cutoff_score:
+    for student in sorted_students:
+        if student[1][0] > cutoff_score[1][0] or \
+           (student[1][0] == cutoff_score[1][0] and student[1][1] > cutoff_score[1][1]) or \
+           (student[1][0] == cutoff_score[1][0] and student[1][1] == cutoff_score[1][1] and student[1][2] > cutoff_score[1][2]):
+            passed_students.add(student[0])
+        elif student[1] == cutoff_score[1]:
+            passed_students.add(student[0])
+
+not_passed = [student for student in sorted_students if student[0] not in passed_students]
+
+if not_passed:
+    first_not_passed_id = not_passed[0][0]
+    print(first_not_passed_id)
+    
+id_1700 = sorted_students[1699][0]  
+
+count_same_as_1700 = sum(1 for student in sorted_students if student[1] == sorted_students[1699][1])
+print(count_same_as_1700)
+
+
+with open(fr"C:\Users\vladm\Downloads\26_18228.txt") as file:
+    N, R = map(int,file.readline().split())
+    lst = [x for x in file]
+    types_of_stickes = {}
+    for i in range(len(lst)):
+        types_of_stickes[i + 1] = max(tuple(map(int,lst[i].split()))) 
+    amount = R * 2
+    count = 0
+    while amount > 0:
+        for i in sorted(types_of_stickes.values(), reverse=True):
+            print(count, amount, i)
+            if amount - i < 0:
+                print('Lower')
+                print(count, amount)
+                break
+            amount -= i
+            count += 1  
+        break
+    for i in sorted(types_of_stickes.items(), key=lambda x: x[1]):
+        if i[1] >= amount:
+            count += 1
+            print(count, i[0])
+            break
+    
+
+with open(fr'C:\Users\vladm\Documents\MyProjects\A lot of files\Other\26_18185.txt') as file:
+    N, K = map(int, file.readline().split())
+    lst =[line for line in file.readlines()]
+schools = []
+for i in range(N):
+    schools.append(tuple(map(int, lst[i].split())))
+    
+movies = []
+for j in range(N, N + K):
+    movies.append(int(lst[j]))
+print(len(schools), len(movies))
+
+schools.sort(key=lambda x: (-x[1], x[0]))
+movies.sort()
+taked_movies = 0
+amount_of_students = 0
+
+for students in schools:
+    movie = 0
+    for mov in movies:
+        if students[2] <= mov:
+            movie = mov
+            break 
+    if movie == 0:
+        continue
+    else:
+        taked_movies += 1
+        amount_of_students += students[2]
+        movies.remove(movie)
+
+print(taked_movies, amount_of_students)

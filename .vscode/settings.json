@@ -1,0 +1,20 @@
+{
+    
+    "files.associations": {
+        "iostream": "cpp"
+    },
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./Python",
+        "-p",
+        "*test.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true,
+
+    "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
+	"editor.fontLigatures": true,
+    "terminal.integrated.gpuAcceleration": "auto",
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
+}

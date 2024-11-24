@@ -1,31 +1,15 @@
-import psycopg2
+def divisers(n):
+    new_set = set()
+    for i in range(1, int(n**0.5) + 1):
+        if n % i == 0:
+            new_set.add(i)
+            new_set.add(n // i)
+    return sorted(new_set)
 
-def connect_database():
-    try:
-        connection = psycopg2.connect(
-            dbname='file_storage',
-            user='vlm326',
-            password='123690',
-            host='localhost',
-            port='5432'
-        )
-        print("Подключение успешно")
-    except Exception as e:
-        print(e)
-
-    
-def add_file(filename, file_data):
-    con = connect_database()
-    cursor = con.cursor()
-    cursor.exucute("INSERT INTO files (filename, file_data) VALUES (%s, %s)", (filename, psycopg2.Binary(file_data)))
-
-
-def show_files():
-    con = connect_database()
-    cursor = con.cursor()
-    cursor.execute("SELECT id, filename FROM files")
-    files = cursor.fetchall()
-    cursor.close()
-    con.close()
-    return files
-
+for i in range(1000):
+    if len(divisers(i)) == 7:
+        print(i, divisers(i))
+        
+#while True:
+#    i = int(input('Введите число: '))
+#    print(divisers(i), len(divisers(i)))
